@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: consumer
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbitmq
+    password: rabbitmq
+
+server:
+  port: 8002
+
+app:
+  rabbit:
+    config:
+      initialInterval: 1000
+      maxInterval: 3000
+      multiplier: 2
+      retries: 3
+      consumers: 5

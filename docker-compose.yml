@@ -1,0 +1,14 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq-intro'
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    hostname: "rabbitmq-intro"
+    labels:
+      NAME: "rabbitmq-intro"
+    environment:
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
