@@ -2,10 +2,10 @@ spring:
   application:
     name: producer
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
     username: rabbitmq
     password: rabbitmq
 
 server:
-  port: 8001
+  port: 8081

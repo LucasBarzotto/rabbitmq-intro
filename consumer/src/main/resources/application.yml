@@ -2,13 +2,13 @@ spring:
   application:
     name: consumer
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
     username: rabbitmq
     password: rabbitmq
 
 server:
-  port: 8002
+  port: 8082
 
 app:
   rabbit:

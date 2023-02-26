@@ -1,14 +1,46 @@
 services:
   rabbitmq:
     image: rabbitmq:3-management-alpine
-    container_name: 'rabbitmq-intro'
+    container_name: 'rabbitmq'
     ports:
       - "15672:15672"
       - "5672:5672"
-    hostname: "rabbitmq-intro"
+    hostname: "rabbitmq"
     labels:
-      NAME: "rabbitmq-intro"
+      NAME: "rabbitmq"
     environment:
       RABBITMQ_DEFAULT_USER: "rabbitmq"
       RABBITMQ_DEFAULT_PASS: "rabbitmq"
       RABBITMQ_DEFAULT_VHOST: "/"
+    healthcheck:
+      test: "rabbitmqctl ping"
+  producer:
+    build:
+      context: ./producer
+      dockerfile: Dockerfile
+    image: producer
+    restart: always
+    container_name: producer
+    healthcheck:
+      test: "wget -nv -t1 --spider http://localhost:8081/api/health-check || exit 1"
+    ports:
+      - "8081:8081"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    deploy:
+      restart_policy:
+        condition: any
+        delay: 5s
+  consumer:
+    build:
+      context: ./consumer
+      dockerfile: Dockerfile
+    image: consumer
+    restart: always
+    container_name: consumer
+    ports:
+      - "8082:8082"
+    depends_on:
+      producer:
+        condition: service_healthy
