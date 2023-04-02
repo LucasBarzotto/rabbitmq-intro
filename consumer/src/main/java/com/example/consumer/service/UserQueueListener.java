@@ -18,14 +18,14 @@ import static com.example.consumer.config.RabbitConstants.QUEUE_USER;
 @Component
 @AllArgsConstructor
 @Slf4j
-public class QueuesListener {
+public class UserQueueListener {
 
     private final ObjectMapper objectMapper;
     private final ThirdPartyService thirdPartyService;
     private final NotificateUserService notificateUserService;
 
     @RabbitListener(queues = {QUEUE_USER})
-    public void consumeFromQueueUser(final Message message) {
+    public void consume(final Message message) {
         try {
             execute(objectMapper.readValue(message.getPayload().toString(), new TypeReference<>() {
             }));

@@ -6,7 +6,7 @@ public final class RabbitConstants {
     }
 
     public static final String USER_DIRECT_EXCHANGE = "user.direct.exchange";
-    public static final String USER_DLQ_EXCHANGE = "user.dlq.exchange";
+    public static final String USER_DLQ_EXCHANGE = "user.dlq.direct.exchange";
 
     public static final String QUEUE_USER = "user";
     public static final String QUEUE_USER_DLQ = "user.dlq";
